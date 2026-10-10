@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Los Vecinos: comedia de edificio en blanco y negro. Comics QML.">
+<title>Descargar — Los Vecinos</title>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--fg:#f2f2f2;--mid:#8a8a8a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--fg);font-family:'Special Elite','Courier New',monospace;line-height:1.6;background-image:radial-gradient(#1a1a1a 1px,transparent 1px);background-size:6px 6px}
+h1,h2,h3,.logo{font-family:'Bebas Neue',Impact,sans-serif;letter-spacing:.06em;font-weight:400;margin:0}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:#000;border-bottom:2px solid var(--fg);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;padding:.6rem 1rem}
+.logo{font-size:1.7rem;color:var(--fg);text-decoration:none}
+nav{display:flex;flex-wrap:wrap;gap:.25rem}
+nav a{color:var(--fg);text-decoration:none;padding:.35rem .7rem;border:1px solid transparent;font-size:.95rem}
+nav a:hover,nav a.on{border-color:var(--fg);background:var(--fg);color:#000}
+main{max-width:1000px;margin:0 auto;padding:1.5rem 1rem 3rem}
+.hero{display:grid;gap:1.5rem;grid-template-columns:1fr;align-items:center}
+@media(min-width:760px){.hero{grid-template-columns:1fr 1.1fr}}
+.cover{border:4px solid var(--fg);background:#fff;box-shadow:8px 8px 0 #333}
+.cover img{width:100%;height:auto;display:block}
+h1{font-size:clamp(2.6rem,10vw,4.6rem);line-height:1;text-shadow:3px 3px 0 #333}
+.tag{color:var(--mid);margin:.8rem 0 1.2rem}
+.btn{display:inline-block;background:var(--fg);color:#000;padding:.7rem 1.2rem;text-decoration:none;font-family:'Bebas Neue',Impact,sans-serif;font-size:1.3rem;letter-spacing:.08em;border:2px solid var(--fg);cursor:pointer}
+.btn:hover{background:#000;color:var(--fg)}
+.btn.alt{background:#000;color:var(--fg)}.btn.alt:hover{background:var(--fg);color:#000}
+.box{border:2px solid var(--fg);padding:1rem 1.2rem;margin:1.2rem 0;background:#000}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.chars{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:1rem}
+.chars div{border:2px solid var(--fg);background:#fff;color:#000;text-align:center;padding:.5rem}
+.chars svg{width:100%;height:auto}
+.chars small{display:block;color:#555}
+.small{color:var(--mid);font-size:.9rem}
+.card{border:2px solid var(--fg);padding:1.2rem;background:#000}
+.card h3{font-size:1.8rem}
+.pages{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));margin-top:1rem}
+.pages div{aspect-ratio:3/4;border:2px dashed var(--mid);display:flex;align-items:center;justify-content:center;color:var(--mid);background:#050505}
+footer{border-top:2px solid var(--fg);text-align:center;padding:1.2rem 1rem;color:var(--mid);font-size:.9rem;background:#000}
+h2.t{font-size:2.4rem;border-bottom:3px solid var(--fg);padding-bottom:.3rem;margin-bottom:1rem}
+
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--fg);z-index:30}
+.tools{display:flex;gap:.5rem;align-items:center}
+.tbtn{background:#000;border:2px solid var(--fg);color:var(--fg);font:inherit;padding:.25rem .6rem;cursor:pointer}
+.tbtn:hover{background:var(--fg);color:#000}
+.burger{display:none}
+@media(max-width:640px){.burger{display:inline-block}nav{display:none;width:100%;order:3;flex-direction:column}nav.open{display:flex}}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+html.neg{filter:invert(1)}
+#up{position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));display:none;z-index:20}
+.card,.chars div{transition:transform .2s,box-shadow .2s}
+.card:hover,.chars div:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 #333}
+body{animation:fi .5s}@keyframes fi{from{opacity:0}}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}body{animation:none}*{transition:none!important}}
+.stats{display:flex;gap:1.5rem;flex-wrap:wrap;margin:0 0 1.2rem}
+.stats b{display:block;font-family:'Bebas Neue',Impact,sans-serif;font-size:2.6rem;line-height:1;font-weight:400}
+.stats span{color:var(--mid);font-size:.85rem}
+.num{font-family:'Bebas Neue',Impact,sans-serif;font-size:3rem;line-height:1;color:var(--mid)}
+.badge{display:inline-block;border:1px solid var(--fg);padding:0 .5rem;font-size:.8rem;margin-top:.4rem}
+.meter{height:14px;border:2px solid var(--fg);margin:.6rem 0}.meter i{display:block;height:100%;width:0;background:var(--fg);transition:width 1s}
+.pages button{font:inherit;cursor:pointer;aspect-ratio:3/4;border:2px dashed var(--mid);color:var(--mid);background:#050505}
+.pages button:hover{border-style:solid;color:var(--fg);border-color:var(--fg)}
+dialog{background:#000;color:var(--fg);border:3px solid var(--fg);padding:1.5rem;max-width:90vw;font-family:inherit}
+dialog::backdrop{background:rgba(0,0,0,.8)}
+.q{border:2px solid var(--fg);margin-bottom:.6rem;background:#000}
+.q button{width:100%;text-align:left;background:none;border:0;color:var(--fg);font:inherit;font-size:1.05rem;padding:.8rem 1rem;cursor:pointer;display:flex;justify-content:space-between}
+.q button:hover{background:#111}
+.q div{max-height:0;overflow:hidden;transition:max-height .35s;padding:0 1rem}
+.q.open div{max-height:12rem;padding:0 1rem 1rem}
+:root{--bg:#14112b;--fg:#f4f1ff;--mid:#a59fd0;--card:#1f1b45;--line:#3d3670;--y:#ffc83d;--p:#ff6b9d;--b:#4dabf7;--g:#51cf66}
+html.neg{--bg:#fff6e0;--fg:#1b1736;--mid:#6b6490;--card:#ffffff;--line:#cfc6e8;filter:none}
+body{background-color:var(--bg);color:var(--fg);background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:20px 20px}
+header{background:var(--card);border-bottom:4px solid var(--y)}
+.logo{color:var(--y)}
+nav a{border-radius:20px;color:var(--fg)}nav a:hover,nav a.on{background:var(--y);border-color:var(--y);color:#14112b}
+h1{color:var(--y);text-shadow:4px 4px 0 var(--p)}
+h2.t{border-bottom:4px solid var(--p)}
+.box,.card{background:var(--card);border:2px solid var(--line);border-radius:14px}
+.box{border-left:6px solid var(--y)}
+.card{border-top:6px solid var(--c,var(--y))}
+.grid>:nth-child(4n+1),.chars>:nth-child(4n+1){--c:var(--b)}
+.grid>:nth-child(4n+2),.chars>:nth-child(4n+2){--c:var(--p)}
+.grid>:nth-child(4n+3),.chars>:nth-child(4n+3){--c:var(--y)}
+.grid>:nth-child(4n+4),.chars>:nth-child(4n+4){--c:var(--g)}
+.btn{background:var(--y);color:#14112b;border:2px solid #14112b;border-radius:10px;box-shadow:4px 4px 0 var(--p)}
+.btn:hover{background:var(--p);color:#14112b;transform:translate(2px,2px);box-shadow:2px 2px 0 var(--y)}
+.btn.alt{background:transparent;color:var(--fg);border-color:var(--fg);box-shadow:4px 4px 0 var(--line)}
+.btn.alt:hover{background:var(--fg);color:var(--bg)}
+.cover{border:4px solid var(--y);border-radius:16px;overflow:hidden;box-shadow:8px 8px 0 var(--p);background:var(--card)}
+.chars div{background:var(--card);color:var(--fg);border:2px solid var(--line);border-bottom:6px solid var(--c,var(--y));border-radius:14px}
+.chars div svg{fill:var(--c,var(--y))}
+.chars small{color:var(--mid)}
+.pages div,.pages button{border-radius:10px;background:var(--card);border-color:var(--line);color:var(--mid)}
+.pages button:hover{color:var(--y);border-color:var(--y)}
+.meter{border-color:var(--line);border-radius:8px;background:var(--card);overflow:hidden}.meter i{background:linear-gradient(90deg,var(--p),var(--y))}
+.badge{border-color:var(--c,var(--y));color:var(--c,var(--y));border-radius:20px;padding:0 .7rem}
+.num{color:var(--c,var(--y))}
+.q{background:var(--card);border-color:var(--line);border-radius:10px}.q button:hover{background:var(--line)}
+dialog{background:var(--card);color:var(--fg);border-color:var(--y);border-radius:14px}
+footer{background:var(--card);border-top:4px solid var(--y);color:var(--mid)}
+.tbtn{background:var(--card);color:var(--fg);border-color:var(--line);border-radius:10px}.tbtn:hover{background:var(--y);color:#14112b}
+#bar{background:linear-gradient(90deg,var(--p),var(--y))}
+.stats b{color:var(--y)}
+.card:hover,.chars div:hover{box-shadow:6px 6px 0 var(--c,var(--y))}
+.av{height:110px;width:auto;display:block;margin:0 auto .6rem}
+.fv{display:flex;justify-content:center;align-items:flex-end;gap:1rem;margin-bottom:.8rem}
+.fv svg{height:56px;width:auto}.fv.big svg{height:120px}
+.chars svg{max-height:170px;width:100%}
+dialog .av{height:90px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="v0" viewBox="-60 -45 120 245"><path d="M-55 190 Q-50 70 0 62 Q50 70 55 190Z" fill="#4dabf7"/><circle cx="0" cy="20" r="34" fill="#4dabf7"/><path d="M0 66 L-9 92 L0 150 L9 92Z" fill="#fff"/><path d="M-12 64 L0 78 L12 64" fill="none" stroke="#fff" stroke-width="3"/><circle cx="-12" cy="18" r="6" fill="#fff"/><circle cx="12" cy="18" r="6" fill="#fff"/><path d="M-10 36 Q0 29 10 36" stroke="#fff" stroke-width="3" fill="none"/></symbol><symbol id="v1" viewBox="-60 -45 120 245"><path d="M-55 190 Q-50 70 0 62 Q50 70 55 190Z" fill="#ff6b9d"/><circle cx="0" cy="-16" r="15" fill="#ff6b9d"/><circle cx="0" cy="20" r="34" fill="#ff6b9d"/><circle cx="-13" cy="18" r="9" fill="#fff"/><circle cx="13" cy="18" r="9" fill="#fff"/><circle cx="-13" cy="18" r="3.5" fill="#14112b"/><circle cx="13" cy="18" r="3.5" fill="#14112b"/><path d="M-9 36 Q0 43 9 36" stroke="#fff" stroke-width="3" fill="none"/></symbol><symbol id="v2" viewBox="-60 -45 120 245"><path d="M-55 190 Q-50 70 0 62 Q50 70 55 190Z" fill="#ffc83d"/><circle cx="0" cy="20" r="34" fill="#ffc83d"/><path d="M-36 8 Q-36 -26 0 -26 Q36 -26 36 8Z" fill="#ffc83d" stroke="#fff" stroke-width="3"/><path d="M-40 8 L52 8 L52 16 L-40 16Z" fill="#ffc83d" stroke="#fff" stroke-width="3"/><circle cx="-12" cy="26" r="6" fill="#fff"/><circle cx="12" cy="26" r="6" fill="#fff"/><rect x="-8" y="100" width="16" height="16" fill="#fff"/></symbol><symbol id="v3" viewBox="-60 -45 120 245"><path d="M-55 190 Q-50 70 0 62 Q50 70 55 190Z" fill="#51cf66"/><circle cx="0" cy="20" r="34" fill="#51cf66"/><path d="M-38 20 Q-38 -24 0 -24 Q38 -24 38 20" fill="none" stroke="#fff" stroke-width="13"/><path d="M-38 20 Q-38 -24 0 -24 Q38 -24 38 20" fill="none" stroke="#51cf66" stroke-width="7"/><rect x="-48" y="8" width="14" height="26" fill="#51cf66" stroke="#fff" stroke-width="3"/><rect x="34" y="8" width="14" height="26" fill="#51cf66" stroke="#fff" stroke-width="3"/><circle cx="-12" cy="22" r="6" fill="#fff"/><circle cx="12" cy="22" r="6" fill="#fff"/><path d="M-10 38 Q0 46 10 38" stroke="#fff" stroke-width="3" fill="none"/></symbol></svg>
+<header>
+<a class="logo" href="index.html">LOS VECINOS</a>
+<div class="tools"><button class="tbtn" id="neg" title="Cambiar tema" aria-label="Cambiar tema">&#9680;</button><button class="tbtn burger" id="burger" aria-label="Menú" aria-expanded="false">&#9776;</button></div>
+<nav><a href="index.html">Home</a><a href="descargar.html" class="on" aria-current="page">Descargar</a><a href="tienda.html">Tienda</a><a href="informacion.html">Información</a><a href="equipo.html">Equipo</a></nav>
+</header>
+<main>
+<section id="descargar">
+<h2 class="t">Descargar</h2>
+<p>Capítulo 1 — La trama principal. En creación, todavía sin lanzar.</p>
+<div class="box reveal"><h3>Progreso del capítulo 1</h3>
+<p class="small" id="pt"></p><div class="meter"><i id="mt"></i></div>
+<div class="pages" id="eps"></div></div>
+<div class="grid reveal">
+<div class="card"><h3>PDF completo</h3><p>Todo el capítulo con sus imágenes, listo para imprimir.</p><a class="btn alt" href="#" id="pdf">Próximamente</a></div>
+</div>
+<dialog id="dg"><svg class="av" viewBox="-60 -45 120 245"><use id="dav" href="#v0"/></svg><h3 id="dt"></h3><p>Este episodio todavía está en creación.</p><button class="btn" id="dc">Cerrar</button></dialog>
+</section>
+</main>
+<footer>
+<div class="fv" aria-hidden="true"><svg viewBox="-60 -45 120 245"><use href="#v0"/></svg><svg viewBox="-60 -45 120 245"><use href="#v1"/></svg><svg viewBox="-60 -45 120 245"><use href="#v2"/></svg><svg viewBox="-60 -45 120 245"><use href="#v3"/></svg></div>
+© 2026 Los Vecinos · Comics QML · Cómic de comedia · Solo en español</footer>
+<script>
+(function(){
+var d=document,h=d.documentElement;
+try{if(localStorage.getItem('neg')==='1')h.classList.add('neg')}catch(e){}
+var bar=d.createElement('div');bar.id='bar';d.body.appendChild(bar);
+var up=d.createElement('button');up.id='up';up.className='tbtn';up.textContent='\u2191';up.setAttribute('aria-label','Subir');d.body.appendChild(up);
+up.onclick=function(){scrollTo({top:0,behavior:'smooth'})};
+function sc(){var m=h.scrollHeight-innerHeight;bar.style.width=(m>0?scrollY/m*100:0)+'%';up.style.display=scrollY>300?'block':'none'}
+addEventListener('scroll',sc,{passive:true});sc();
+d.getElementById('burger').onclick=function(){var o=d.querySelector('nav').classList.toggle('open');this.setAttribute('aria-expanded',o)};
+d.getElementById('neg').onclick=function(){var o=h.classList.toggle('neg');try{localStorage.setItem('neg',o?'1':'0')}catch(e){}};
+var els=d.querySelectorAll('.reveal');
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});els.forEach(function(e){io.observe(e)})}else{els.forEach(function(e){e.classList.add('in')})}
+})();
+var N=5,done=0,eps=document.getElementById('eps'),dg=document.getElementById('dg');
+document.getElementById('pt').textContent=done+' de '+N+' episodios publicados';
+setTimeout(function(){document.getElementById('mt').style.width=(done/N*100)+'%'},100);
+for(var i=1;i<=N;i++){(function(i){var b=document.createElement('button');b.textContent='Ep. '+i;b.onclick=function(){document.getElementById('dt').textContent='Episodio '+i;document.getElementById('dav').setAttribute('href','#v'+(i%4));if(dg.showModal)dg.showModal();else dg.setAttribute('open','')};eps.appendChild(b)})(i)}
+document.getElementById('dc').onclick=function(){dg.close?dg.close():dg.removeAttribute('open')};
+document.getElementById('pdf').onclick=function(e){e.preventDefault()};
+</script>
+</body>
+</html>
